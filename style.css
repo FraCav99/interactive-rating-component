@@ -1,0 +1,178 @@
+:root {
+  --primary-clr-100: hsl(25, 97%, 53%);
+
+  --neutral-clr-100: hsl(0, 0%, 100%);
+  --neutral-clr-200: hsl(217, 12%, 63%);
+  --neutral-clr-300: hsl(213, 19%, 18%);
+  --neutral-clr-400: hsl(216, 12%, 8%);
+
+  --fw-400: 400;
+  --fw-700: 700;
+}
+
+/* Basic reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+/* Content styling */
+
+body {
+  min-height: 100vh; /* Fallback if dvh is not supported */
+  min-height: 100dvh;
+  line-height: 1.5;
+  font-family: "Overpass", sans-serif;
+  background-color: var(--neutral-clr-400);
+  color: var(--neutral-clr-100);
+
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+main {
+  align-content: center;
+}
+
+.wrapper {
+  background-color: var(--neutral-clr-300);
+  max-width: 30rem;
+  margin-inline: auto;
+  padding: 2em 3em;
+  border-radius: 2em;
+}
+
+/* Rating state */
+form {
+  margin-top: 1.5rem;
+}
+
+fieldset > * + * {
+  margin-top: 0.5rem;
+}
+
+.circle {
+  width: 3rem;
+  min-height: 3rem;
+  border-radius: 50%;
+  background-color: var(--neutral-clr-400);
+  position: relative;
+  display: grid;
+  place-content: center;
+}
+
+.form-title {
+  font-weight: var(--fw-700);
+  font-size: 1.5rem;
+}
+
+.form-text {
+  color: var(--neutral-clr-200);
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+label {
+  color: var(--neutral-clr-200);
+  font-weight: var(--fw-700);
+}
+
+label:hover {
+  background-color: var(--primary-clr-100);
+  color: var(--neutral-clr-400);
+  cursor: pointer;
+}
+
+label input[type="radio"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+label:has(input[type="radio"]:checked) {
+  background-color: var(--neutral-clr-100);
+  color: var(--neutral-clr-400);
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: var(--primary-clr-100);
+  text-transform: uppercase;
+  border: none;
+  letter-spacing: 0.25em;
+  font-weight: var(--fw-700);
+  border-radius: 2em;
+  padding: 1em;
+  margin-top: 2rem;
+}
+
+.submit-btn:hover {
+  cursor: pointer;
+  background-color: var(--neutral-clr-100);
+}
+
+/* Thanks state */
+.thanks {
+  text-align: center;
+  display: none;
+}
+
+.thanks img {
+  margin-inline: auto;
+}
+
+.thanks > * + * {
+  margin-top: 1rem;
+}
+
+.thanks p {
+  color: var(--neutral-clr-200);
+}
+
+.thanks .rating-selected {
+  background-color: var(--neutral-clr-400);
+  color: var(--primary-clr-100);
+  border-radius: 2em;
+  padding: 0.5em 1em;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+.attribution {
+  font-size: 0.6875rem;
+  padding: 2rem;
+  text-align: center;
+}
+
+.attribution a {
+  color: var(--primary-clr-100);
+}
