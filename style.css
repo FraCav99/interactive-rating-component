@@ -5,9 +5,16 @@
   --neutral-clr-200: hsl(217, 12%, 63%);
   --neutral-clr-300: hsl(213, 19%, 18%);
   --neutral-clr-400: hsl(216, 12%, 8%);
+  --bg-gradient: linear-gradient(
+    to top,
+    hsl(215, 24%, 12%),
+    hsl(215, 20%, 17%)
+  );
 
   --fw-400: 400;
   --fw-700: 700;
+
+  --transition-ms: 200ms;
 }
 
 /* Basic reset */
@@ -56,10 +63,10 @@ main {
 }
 
 .wrapper {
-  background-color: var(--neutral-clr-300);
-  max-width: 30rem;
+  background-image: var(--bg-gradient);
+  max-width: min(25.75rem, calc(100% - 3rem));
   margin-inline: auto;
-  padding: 2em 3em;
+  padding: clamp(1.5rem, 5vw, 2rem);
   border-radius: 2em;
 }
 
@@ -76,7 +83,7 @@ fieldset > * + * {
   width: 3rem;
   min-height: 3rem;
   border-radius: 50%;
-  background-color: var(--neutral-clr-400);
+  background-color: var(--neutral-clr-300);
   position: relative;
   display: grid;
   place-content: center;
@@ -101,12 +108,7 @@ fieldset > * + * {
 label {
   color: var(--neutral-clr-200);
   font-weight: var(--fw-700);
-}
-
-label:hover {
-  background-color: var(--primary-clr-100);
-  color: var(--neutral-clr-400);
-  cursor: pointer;
+  transition: background-color var(--transition-ms), color var(--transition-ms);
 }
 
 label input[type="radio"] {
@@ -118,7 +120,14 @@ label input[type="radio"] {
   height: 0;
 }
 
-label:has(input[type="radio"]:checked) {
+label:hover,
+label:focus-within {
+  background-color: var(--primary-clr-100);
+  color: var(--neutral-clr-400);
+  cursor: pointer;
+}
+
+label:has(input[type="radio"]:checked):not(:focus-within) {
   background-color: var(--neutral-clr-100);
   color: var(--neutral-clr-400);
 }
@@ -133,11 +142,14 @@ label:has(input[type="radio"]:checked) {
   border-radius: 2em;
   padding: 1em;
   margin-top: 2rem;
+  transition: background-color var(--transition-ms) ease;
 }
 
-.submit-btn:hover {
+.submit-btn:hover,
+.submit-btn:focus {
   cursor: pointer;
   background-color: var(--neutral-clr-100);
+  outline: none;
 }
 
 /* Thanks state */
