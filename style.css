@@ -63,11 +63,14 @@ main {
 }
 
 .wrapper {
+  --wrapper-padding: clamp(1.5rem, 5vw, 2rem);
+
   background-image: var(--bg-gradient);
   max-width: min(25.75rem, calc(100% - 3rem));
   margin-inline: auto;
-  padding: clamp(1.5rem, 5vw, 2rem);
+  padding: var(--wrapper-padding);
   border-radius: 2em;
+  overflow: hidden;
 }
 
 /* Rating state */
@@ -154,8 +157,10 @@ label:has(input[type="radio"]:checked):not(:focus-within) {
 
 /* Thanks state */
 .thanks {
-  text-align: center;
   display: none;
+  text-align: center;
+  transform: translateX(calc(100% + var(--wrapper-padding)));
+  opacity: 0;
 }
 
 .thanks img {
@@ -177,6 +182,28 @@ label:has(input[type="radio"]:checked):not(:focus-within) {
   padding: 0.5em 1em;
   width: fit-content;
   margin-inline: auto;
+}
+
+.slide-fade-out {
+  animation: slide-fade-out 500ms forwards;
+}
+
+@keyframes slide-fade-out {
+  100% {
+    transform: translateX(calc(-100% - var(--wrapper-padding)));
+    opacity: 0;
+  }
+}
+
+.slide-fade-in {
+  animation: slide-fade-in 500ms forwards;
+}
+
+@keyframes slide-fade-in {
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .attribution {

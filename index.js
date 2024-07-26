@@ -4,15 +4,29 @@ const thanksComponent = document.getElementById("thanks");
 
 ratingForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  const rating = document.querySelector('input[type="radio"]:checked');
 
-  // User didn't checked any radio button.
-  if (!rating) {
+  const rating = new FormData(ratingForm).get("rating");
+
+  // User didn't choose any rating value.
+  if (rating === null) {
     return;
   }
 
-  ratingComponent.style.display = "none";
-  thanksComponent.style.display = "block";
-  const ratingValue = thanksComponent.querySelector("#rating-value");
-  ratingValue.textContent = rating.value;
+  ratingComponent.addEventListener(
+    "animationend",
+    () => {
+      ratingComponent.style.display = "none";
+
+      thanksComponent.style.display = "block";
+      thanksComponent.classList.add("slide-fade-in");
+
+      thanksComponent.innerHTML = thanksComponent.innerHTML.replace(
+        /{{ rating }}/g,
+        rating
+      );
+    },
+    { once: true }
+  );
+
+  ratingComponent.classList.add("slide-fade-out");
 });
